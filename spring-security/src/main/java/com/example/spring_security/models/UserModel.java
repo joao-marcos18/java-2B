@@ -17,9 +17,9 @@ public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String user;
+    private String login;
     private String password;
-    private Enum role;
+    private UserRole role;
 
     public Long getId() {
         return id;
@@ -29,40 +29,41 @@ public class UserModel implements UserDetails {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public Enum getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(Enum role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return  List.of(new SimpleGrantedAuthority("USER_ADMIN"));
-        else return List.of(new SimpleGrantedAuthority("USER_CLIENTE"));
+        if(this.role == UserRole.ADMIN) return  List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
     public @Nullable String getPassword() {
-        return "senha";
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return "login";
+        return login;
     }
 
 }
