@@ -3,8 +3,10 @@ package com.example.spring_security.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class ProdutoModel {
@@ -15,6 +17,8 @@ public class ProdutoModel {
     private String nome;
     private BigDecimal preco;
     private Integer estoque;
+    @OneToMany
+    private List<JobModel> jobModelList;
 
     public Long getId() {
         return id;
@@ -46,5 +50,13 @@ public class ProdutoModel {
 
     public void setEstoque(Integer estoque) {
         this.estoque = estoque;
+    }
+
+    public List<JobModel> getJobModelList() {
+        return jobModelList;
+    }
+
+    public void setJobModelList(List<JobModel> jobModelList) {
+        this.jobModelList = jobModelList;
     }
 }
