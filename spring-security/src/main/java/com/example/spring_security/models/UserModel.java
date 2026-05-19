@@ -3,6 +3,7 @@ package com.example.spring_security.models;
 import com.example.spring_security.Enums.UserRole;
 import jakarta.persistence.*;
 import org.jspecify.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,9 @@ public class UserModel implements UserDetails {
     private String login;
     private String password;
     private UserRole role;
+
+    @OneToMany
+    private List<ProdutoModel> produtoModels;
 
     public UserModel(String login, String password, UserRole role) {
         this.login = login;

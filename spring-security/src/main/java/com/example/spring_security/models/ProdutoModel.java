@@ -1,9 +1,6 @@
 package com.example.spring_security.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,11 +9,12 @@ import java.util.List;
 public class ProdutoModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private BigDecimal preco;
     private Integer estoque;
+
     @OneToMany
     private List<JobModel> jobModelList;
 
