@@ -21,6 +21,17 @@ public class UserModel implements UserDetails {
     private String password;
     private UserRole role;
 
+    public UserModel(String login, String password, UserRole role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    public UserModel(){
+
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -52,9 +63,9 @@ public class UserModel implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) return  List.of
-                (new SimpleGrantedAuthority("ROLE_ADMIN"),
-                new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_EXECUTIVO"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+                (new SimpleGrantedAuthority("ADMIN"),
+                new SimpleGrantedAuthority("USER"));
+        else return List.of(new SimpleGrantedAuthority("USER"));
     }
 
     @Override
